@@ -1,0 +1,57 @@
+---
+import Showcase from '../../components/Showcase'
+import LayoutPropsTable from './LayoutPropsTable.astro'
+import type { SectionData } from '../../types'
+import capitalize from 'just-capitalize'
+
+interface Props {
+  data: SectionData
+}
+
+const { data } = Astro.props
+const capitalizedName = capitalize(data.name)
+---
+
+<section>
+  <div>
+    <h2 id={data.name}>
+      {capitalizedName}
+    </h2>
+    <p class="lead">
+      {data.subhead}
+    </p>
+  </div>
+
+  <div
+    class="prose-code:text-[0.9375em]"
+    set:html={data.description}
+  />
+
+  <h3 id={`explore-${data.name}`}>Explore</h3>
+  <p class="text-sm">
+    Play around with the classes below to get a feel for the {
+      capitalizedName
+    } layout.
+  </p>
+  <Showcase
+    client:idle
+    demoClassNames={data.demoClassNames}
+    requiredClassNames={data.requiredClassNames}
+    customBlocks={data.customBlocks}
+    blockCount={data.blockCount}
+    actions={data.actions}
+    hasCustomContent={data.hasCustomContent}
+  >
+    <slot />
+  </Showcase>
+
+  <h3 id={`${data.name}-props`}>Props</h3>
+  <p class="text-sm">
+    Classes to modify the default {capitalizedName} layout.
+  </p>
+  <LayoutPropsTable
+    data={{
+      propsDocs: data.propsDocs,
+    }}
+  />
+</section>

@@ -1,0 +1,427 @@
+---
+import type { LayoutName, SectionData } from '../../../types'
+import * as stackDescription from './descriptions/stack.md'
+import * as boxDescription from './descriptions/box.md'
+import * as centerDescription from './descriptions/center.md'
+import * as clusterDescription from './descriptions/cluster.md'
+import * as sidebarDescription from './descriptions/sidebar.md'
+import * as switcherDescription from './descriptions/switcher.md'
+import * as coverDescription from './descriptions/cover.md'
+import * as gridDescription from './descriptions/grid.md'
+import * as frameDescription from './descriptions/frame.md'
+import * as reelDescription from './descriptions/reel.md'
+import * as imposterDescription from './descriptions/imposter.md'
+import * as iconDescription from './descriptions/icon.md'
+
+export const data: Record<LayoutName, SectionData> = {
+  stack: {
+    name: 'stack',
+    subhead: 'A container to stack elements vertically.',
+    description: stackDescription.compiledContent(),
+    propsDocs: [
+      [
+        ['`space`', 'Control the space between elements.'],
+        ['`spacing`', 'Defaults to `layouts.baseSpacing`.'],
+      ],
+      [
+        [
+          '`split-after`',
+          'Split the stack after an element. The stack needs a defined `height` (not `auto`) for this to work.',
+        ],
+        [
+          '`1` - `9`',
+          'This range can be increased via the `maxStackSplitAfter` option.',
+        ],
+      ],
+    ],
+    demoClassNames: {
+      'stack-l': true,
+      'stack-l_space-2': false,
+      'stack-l_split-after-2': false,
+    },
+    requiredClassNames: ['stack-l'],
+    customBlocks: ['h-9', 'h-9', 'h-9'],
+  },
+  box: {
+    name: 'box',
+    subhead: 'A container to demarcate content.',
+    description: boxDescription.compiledContent(),
+    propsDocs: [
+      [
+        ['`p`', `Control the box's padding.`],
+        ['`spacing`', 'Defaults to `layouts.baseSpacing`.'],
+      ],
+      [['`text`', "Control the box's text color."], ['`colors`']],
+      [['`bg`', "Control the box's background color."], ['`colors`']],
+      [['`border`', "Control the box's border color."], ['`colors`']],
+    ],
+    demoClassNames: {
+      'box-l': true,
+      'box-l_p-10': false,
+      'box-l_text-gray-300': false,
+      'box-l_bg-[theme(colors.gray.800)]': false,
+      'box-l_border-[#ff0000]': false,
+      'border-2': true,
+      'border-hc-2': false,
+    },
+    requiredClassNames: ['box-l'],
+    actions: ['highContrast'],
+    hasCustomContent: true,
+  },
+  center: {
+    name: 'center',
+    subhead: 'A container that centers itself horizontally.',
+    description: centerDescription.compiledContent(),
+    propsDocs: [
+      [
+        [
+          '`max-w`',
+          'Control the maximum width of the centered column.',
+        ],
+        ['`maxWidth`', 'Defaults to `layouts.measure`.'],
+      ],
+      [
+        [
+          '`gutters`',
+          'Control the width of gutters around the centered column.',
+        ],
+        ['`spacing`', 'No gutters by default.'],
+      ],
+      [['`text`', 'Also center the text.'], ['-']],
+      [
+        [
+          '`intrinsic`',
+          'Center according to the intrinsic width of the content instead of the parent.',
+        ],
+        ['-'],
+      ],
+    ],
+    demoClassNames: {
+      'center-l': true,
+      'center-l_max-w-xs': false,
+      'center-l_gutters-4': false,
+      'center-l_text': false,
+      'center-l_intrinsic': false,
+    },
+    requiredClassNames: ['center-l'],
+    actions: ['narrow'],
+    hasCustomContent: true,
+  },
+  cluster: {
+    name: 'cluster',
+    subhead:
+      'A container for a row of elements which wrap on hitting the edge of the container.',
+    description: clusterDescription.compiledContent(),
+    propsDocs: [
+      [
+        ['`space`', 'Control the space between elements.'],
+        ['`spacing`', 'Defaults to `layouts.baseSpacing`.'],
+      ],
+      [
+        [
+          '`item-min-w`',
+          'Control the minimum width of each element (override the intrinsic width of elements).',
+        ],
+        ['`width`, `minWidth`, `maxWidth`'],
+      ],
+      [['`center`', 'Center the elements horizontally.'], ['-']],
+    ],
+    demoClassNames: {
+      'cluster-l': true,
+      'cluster-l_space-2': false,
+      'cluster-l_item-min-w-24': false,
+      'cluster-l_center': false,
+    },
+    requiredClassNames: ['cluster-l'],
+    actions: ['narrow'],
+    customBlocks: [
+      'min-w-[3.5rem]',
+      'min-w-[6rem]',
+      'min-w-[2rem]',
+      'min-w-[5rem]',
+      'min-w-[6rem]',
+    ],
+  },
+  sidebar: {
+    name: 'sidebar',
+    subhead:
+      'A container to place a side element next to a main element.',
+    description: sidebarDescription.compiledContent(),
+    propsDocs: [
+      [
+        [
+          '`space`',
+          'Control the width of the space between the side element and main element.',
+        ],
+        ['`spacing`', 'Defaults to `layouts.baseSpacing`.'],
+      ],
+      [
+        [
+          '`main-min-w`',
+          'Minimum width of the main element. Any lower and wrapping will occur.',
+        ],
+        [
+          '`width`',
+          'Only percentage values. Defaults to `layouts.sidebarMainMinWidth`',
+        ],
+      ],
+      [
+        ['`side-w`', 'Control the width of the side element.'],
+        ['`width`', 'Excluding percentage values.'],
+      ],
+      [
+        [
+          '`no-stretch`',
+          'Let the side element keep its intrinsic height instead of stretching to be the height of the main element.',
+        ],
+        ['-'],
+      ],
+    ],
+    demoClassNames: {
+      'sidebar-l': true,
+      'sidebar-l_space-2': false,
+      'sidebar-l_main-min-w-4/5': false,
+      'sidebar-l_side-w-40': false,
+      'sidebar-l_no-stretch': false,
+    },
+    requiredClassNames: ['sidebar-l'],
+    actions: ['narrow'],
+    hasCustomContent: true,
+  },
+  switcher: {
+    name: 'switcher',
+    subhead:
+      'A container to switch elements between a horizontal and vertical layout.',
+    description: switcherDescription.compiledContent(),
+    propsDocs: [
+      [
+        ['`space`', 'Control the space between elements.'],
+        ['`spacing`', 'Defaults to `layouts.baseSpacing`.'],
+      ],
+      [
+        [
+          '`threshold`',
+          'Control the width of the container at which the layout switches.',
+        ],
+        [
+          '`width`, `minWidth`, `maxWidth`',
+          'Defaults to `layouts.measure`.',
+        ],
+      ],
+      [
+        [
+          '`limit`',
+          'Control the maximum number of elements that can be shown side-by-side.',
+        ],
+        [
+          '`1` - `9`',
+          'Defaults to `switcherLimit` plugin option. The range of values can be increased via the `maxSwitcherLimit` plugin option.',
+        ],
+      ],
+    ],
+    demoClassNames: {
+      'switcher-l': true,
+      'switcher-l_space-2': false,
+      'switcher-l_threshold-xs': true,
+      'switcher-l_limit-3': false,
+    },
+    requiredClassNames: ['switcher-l'],
+    actions: ['narrow'],
+    blockCount: 4,
+  },
+  cover: {
+    name: 'cover',
+    subhead: 'A container to vertically center a principal element.',
+    description: coverDescription.compiledContent(),
+    propsDocs: [
+      [
+        [
+          '`space`',
+          'Control the minimum space between and around all child elements.',
+        ],
+        ['`spacing`', 'Defaults to `layouts.baseSpacing`.'],
+      ],
+      [
+        [
+          '`min-h`',
+          'Control the minimum height of the container element.',
+        ],
+        [
+          '`height`, `minHeight`, `maxHeight`',
+          'Defaults to the screen height i.e. `100vh`.',
+        ],
+      ],
+      [
+        ['`no-pad`', 'Remove padding from the container element.'],
+        ['-'],
+      ],
+    ],
+    demoClassNames: {
+      'cover-l': true,
+      'cover-l_space-2': false,
+      'cover-l_min-h-full': true,
+      'cover-l_no-pad': false,
+    },
+    requiredClassNames: ['cover-l'],
+    customBlocks: [
+      'h-9 bg-secondary-500',
+      'h-24 cover-l_center',
+      'h-9 bg-secondary-500',
+    ],
+  },
+  grid: {
+    name: 'grid',
+    subhead:
+      'A container to align elements to horizontal and vertical rules of a grid.',
+    description: gridDescription.compiledContent(),
+    propsDocs: [
+      [
+        ['`space`', 'Control the space between child elements.'],
+        ['`spacing`', 'Defaults to `layouts.baseSpacing`.'],
+      ],
+      [
+        [
+          '`item-min-w`',
+          'Control the minimum allowed width of a child element.',
+        ],
+        [
+          '`width`, `minWidth`, `maxWidth`',
+          'Defaults to `layout.gridItemMinWidth`.',
+        ],
+      ],
+    ],
+    demoClassNames: {
+      'grid-l': true,
+      'grid-l_space-2': false,
+      'grid-l_item-min-w-[200px]': false,
+    },
+    requiredClassNames: ['grid-l'],
+    blockCount: 5,
+    actions: ['narrow'],
+  },
+  frame: {
+    name: 'frame',
+    subhead: 'A container with a fixed aspect ratio.',
+    description: frameDescription.compiledContent(),
+    propsDocs: [
+      [
+        ['`aspect`', 'Control the aspect ratio of the container.'],
+        ['`aspectRatio`', 'Defaults to `layouts.frameAspectRatio`.'],
+      ],
+    ],
+    demoClassNames: {
+      'frame-l': true,
+      'frame-l_aspect-square': false,
+    },
+    requiredClassNames: ['frame-l'],
+    blockCount: 0,
+  },
+  reel: {
+    name: 'reel',
+    subhead:
+      'A container for a row of elements that do not wrap but instead scroll horizontally.',
+    description: reelDescription.compiledContent(),
+    propsDocs: [
+      [
+        ['`space`', 'Control the space between child elements.'],
+        ['`spacing`', 'Defaults to `layouts.baseSpacing`.'],
+      ],
+      [
+        [
+          '`item-w`',
+          'Set an explicit width for each child element (as opposed to intrinsic width).',
+        ],
+        ['`width`, `minWidth`, `maxWidth`'],
+      ],
+      [
+        ['`h`', 'Set an explicit height for the container.'],
+        ['`height`, `minHeight`, `maxHeight`'],
+      ],
+    ],
+    demoClassNames: {
+      'reel-l': true,
+      'reel-l_space-2': false,
+      'reel-l_item-w-xs': false,
+      'reel-l_h-1/2': false,
+      '!scrollbar-[#fff]': false,
+      'no-scrollbar': false,
+    },
+    requiredClassNames: ['reel-l'],
+    customBlocks: [
+      'h-full min-h-[6rem] min-w-[250px]',
+      'h-full min-h-[6rem] min-w-[200px]',
+      'h-full min-h-[6rem] min-w-[100px]',
+      'h-full min-h-[6rem] min-w-[250px]',
+      'h-full min-h-[6rem] min-w-[300px]',
+    ],
+  },
+  imposter: {
+    name: 'imposter',
+    subhead:
+      'A container that superimposes itself over other content.',
+    description: imposterDescription.compiledContent(),
+    propsDocs: [
+      [
+        [
+          '`m`',
+          'Control the margin between the imposter and the positioning container.',
+        ],
+        ['`spacing`', 'Defaults to `layouts.baseSpacing`.'],
+      ],
+      [
+        [
+          '`fixed`',
+          'Positions the imposter relative to the viewport instead of a positioning container.',
+        ],
+        ['-'],
+      ],
+    ],
+    demoClassNames: {
+      'imposter-l': true,
+      'imposter-l_m-12': false,
+      'imposter-l_fixed': false,
+    },
+    requiredClassNames: ['imposter-l'],
+    hasCustomContent: true,
+  },
+  icon: {
+    name: 'icon',
+    subhead: 'A container to place an icon next to text.',
+    description: iconDescription.compiledContent(),
+    propsDocs: [
+      [
+        ['`size`', 'Control the size of the icon.'],
+        ['`width`, `height`', 'Defaults to `layouts.iconSize`.'],
+      ],
+      [
+        [
+          '`space`',
+          'Control the space between the icon and text (if any).',
+        ],
+        ['`spacing`', 'Defaults to `layouts.iconGap`.'],
+      ],
+      [
+        ['`nudge`', 'Fine-tune the position of the icon.'],
+        [
+          '`sm`, `md`, `lg`, `xl`',
+          'Default to `layouts.iconNudgeSm`, `layouts.iconNudgeMd`, `layouts.iconNudgeLg` and `layouts.iconNudgeXl` respectively.',
+        ],
+      ],
+      [
+        ['`vertical`', 'Align the icon vertically with the text.'],
+        ['-'],
+      ],
+    ],
+    demoClassNames: {
+      'icon-l': true,
+      'icon-l_size-[1em]': false,
+      'icon-l_space-[0.2em]': false,
+      'icon-l_nudge-sm': false,
+      'icon-l_vertical': false,
+      lowercase: false,
+    },
+    requiredClassNames: ['icon-l'],
+    hasCustomContent: true,
+  },
+}
+---

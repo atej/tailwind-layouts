@@ -1,0 +1,46 @@
+{
+  "name": "tailwind-layouts",
+  "version": "0.1.0",
+  "license": "ISC",
+  "author": "Aseem Taneja <taneja.aseem@gmail.com> (https://twitter.com/aseemtaneja)",
+  "description": "Layout primitives for TailwindCSS",
+  "keywords": [
+    "tailwindcss",
+    "tailwindcss-plugin",
+    "tailwind",
+    "tailwind-plugin",
+    "css-layout",
+    "every-layout",
+    "ui-library",
+    "ui-kit",
+    "design-system",
+    "css",
+    "rtl"
+  ],
+  "bugs": {
+    "url": "https://github.com/atej/tailwind-layouts/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/tailwind-layouts.umd.cjs",
+  "module": "./dist/tailwind-layouts.js",
+  "exports": {
+    ".": {
+      "import": "./dist/tailwind-layouts.js",
+      "require": "./dist/tailwind-layouts.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "tsc && vite build",
+    "check": "tsc",
+    "publish": "npm run build && npm publish"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.7",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4"
+  }
+}

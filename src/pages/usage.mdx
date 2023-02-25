@@ -1,0 +1,280 @@
+---
+layout: '../layouts/Base.astro'
+title: 'Usage'
+---
+
+import { DEFAULT_THEME_URL, DEFAULT_OPTIONS_URL } from '../constants'
+
+## Installation
+
+Install the plugin from npm:
+
+```
+npm install -D tailwind-layouts
+```
+
+Then add the plugin to your `tailwind.config.js` file:
+
+```js
+const { tailwindLayouts } = require('tailwind-layouts')
+
+module.exports = {
+  theme: {
+    // ...
+  },
+  plugins: [
+    tailwindLayouts,
+    // ...
+  ],
+}
+```
+
+---
+
+## Usage
+
+Now you can use layout classes to compose layouts. Go to the [Layouts](/layouts) page to see all the available layouts.
+
+### Composing layouts
+
+Much like Tailwind's utility classes, each layout utility class is designed to have a single responsibility. This means that you compose layout classes together to achive the desired overall layout.
+
+For example, if you want to arrange elements one on top of the other _and_ want them to be centered, you should use the `stack-l` class on the parent container to achieve the stacking and the `center-l` class for centering.
+
+### Applying layout classes
+
+Each layout class is meant to be applied on a **"container"** element (non-semantic or semantic). The layout class then operates on the container itself and the child elements (usually only direct) of the container element as needed to achieve the layout.
+
+Some layouts require one of the child elements to be specified by a class as well. For example, the [Cover](/layouts#cover) layout requires the `cover-l` class on the container element and the `cover-l_center` class on the child element that should be centered.
+
+### Using prop classes
+
+Each layout class comes with sensible defaults. However, you can customize the layout by using prop classes.
+
+> For example, when you apply the `stack-l` class, you get the default amount of spacing between the stacked child elements. You can customize this spacing by using the `stack-l_space-*` prop classes. The class `stack-l_space-6` will corresopond to `spacing.6` in your theme (`1.5rem` in the Tailwind's default theme).
+
+Here are some things to note when using prop classes:
+
+- Prop classes are **optional** and are only required to override the layout's defaults.
+- Prop classes require you to first apply the base layout class on the container element for them to work. This is because, to achieve their overriding behaviour, prop classes use CSS specificity by latching onto the base class.
+  > For instance, `stack-l_space-6` will not work unless you also apply the `stack-l` class.
+- Prop classes follow the naming pattern <code class="no-wrap">layout_prop-value</code> where `layout` is the base layout class e.g. `stack-l`, `prop` is the name of the prop e.g. `space` and `value` is the value of the prop e.g. `6`.
+- All prop classes map to appropriate values in your theme.
+  > With the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension, you can conveniently see all the available prop classes for each layout class and also get autocompletion for their values.
+- You can also provide [arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) on the fly to any of the prop classes using Tailwind's square bracket notation.
+
+---
+
+## Plugin configuration
+
+The plugin is extensively configurable.
+
+You can configure the plugin via the `layouts` section of your `tailwind.config.js` file:
+
+```js
+const { tailwindLayouts } = require('tailwind-layouts')
+
+module.exports = {
+  theme: {
+    extend: {
+      layouts: ({ theme }) => ({
+        // your overrides...
+      }),
+    },
+  },
+  plugins: [
+    tailwindLayouts,
+    // ...
+  ],
+}
+```
+
+See the <a href={DEFAULT_THEME_URL}>default theme</a> for all available theme options.
+
+Some options which are not so theme related are configured by passing an object as an argument while registering the plugin:
+
+```js
+const {
+  tailwindLayouts,
+  defaultOptions,
+} = require('tailwind-layouts')
+
+module.exports = {
+  theme: {
+    // ...
+  },
+  plugins: [
+    tailwindLayouts({
+      ...defaultOptions,
+      // your overrides...
+    }),
+    // ...
+  ],
+}
+```
+
+See the <a href={DEFAULT_OPTIONS_URL}>default options</a> for all available plugin options.
+
+Let's look at some available configuration options.
+
+### Using a global measure
+
+The [measure](https://en.wikipedia.org/wiki/Line_length) is the width of a line of text. Choosing a good measure is important for readability.
+
+A default measure value of `65ch` is used by all the layouts that need a measure. This value can be configured via the `measure` option in the `layouts` section of your `tailwind.config.js` file.
+
+```js
+module.exports = {
+  theme: {
+    extend: {
+      layouts: ({ theme }) => ({
+        measure: '75ch',
+        // ...
+      }),
+    },
+  },
+```
+
+The plugin also sets this measure value globally with some default exceptions:
+
+```css
+* {
+  max-width: 65ch;
+}
+
+html,
+body,
+div,
+header,
+nav,
+main,
+footer {
+  max-width: none;
+}
+```
+
+You can specify the exceptions via the `measureExceptions` plugin option.
+
+```js
+module.exports = {
+  plugins: [
+    tailwindLayouts({
+      ...defaultOptions,
+      measureExceptions:
+        'html,body,div,header,nav,main,footer,section',
+    }),
+  ],
+}
+```
+
+If you want to opt out of the global measure, you can set the `useGlobalMeasure` option to `false`:
+
+```js
+module.exports = {
+  plugins: [
+    tailwindLayouts({
+      ...defaultOptions,
+      useGlobalMeasure: false,
+    }),
+  ],
+}
+```
+
+#### Using with Tailwind Typography
+
+The official [Tailwind Typography](https://tailwindcss.com/docs/typography-plugin) plugin also sets a measure for prose content. If you are using a global measure and want it to apply to your prose content, you can apply the `max-w-measure` class along with the `prose` class to your prose container.
+
+#### Overriding measure for an element
+
+If for some reason you want to override the measure for a specific element, you can always use the `max-w-none` class.
+
+### Using scrollbar styles
+
+Layouts like the [Reel](/layouts#reel) use a scrollbar to indicate scrollable content. The plugin allows you to style scrollbars in two ways:
+
+#### Global scrollbar styles
+
+You can set a global style for your scrollbars by setting the `useGlobalScrollbarStyles` option to `true`:
+
+```js
+module.exports = {
+  plugins: [
+    tailwindLayouts({
+      ...defaultOptions,
+      useGlobalScrollbarStyles: true,
+    }),
+  ],
+}
+```
+
+The scrollbar theme itself can be configured in the `layouts` section of your `tailwind.config.js` file:
+
+```js
+module.exports = {
+  theme: {
+    extend: {
+      layouts: ({ theme }) => ({
+        scrollbarThumbColor: theme('colors.gray.500'),
+        scrollbarTrackColor: theme('colors.gray.200'),
+        scrollbarSize: 'medium' // 'thin' | 'medium' | 'thick'
+        scrollbarBorderRadius: '9999px', // 9999px | 0px
+      }),
+    },
+  },
+}
+```
+
+#### Element-specific scrollbar styles
+
+You can also apply scrollbar styles to specific elements. Use the [scrollbar utility](/utilities#scrollbar) for this purpose.
+
+### Setting a base spacing
+
+The plugin uses a base spacing value of `1rem` for all the layouts that need a spacing between or around elements. This value can be configured via the `baseSpacing` option in the `layouts` section of your `tailwind.config.js` file.
+
+```js
+module.exports = {
+  theme: {
+    extend: {
+      layouts: ({ theme }) => ({
+        baseSpacing: '1.5rem',
+      }),
+    },
+  },
+}
+```
+
+### Using CSS logical properties
+
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties) have [good support](https://caniuse.com/css-logical-props) across all modern browsers. They are a great way to write CSS that adapts to the reading direction of the document. You can use logical properties in your layouts by setting the `useLogicalProperties` option to `true`:
+
+```js
+module.exports = {
+  plugins: [
+    tailwindLayouts({
+      ...defaultOptions,
+      useLogicalProperties: true,
+    }),
+  ],
+}
+```
+
+### Using custom class names
+
+You can override the default class names for some or all layouts using the `classNames` option:
+
+```js
+module.exports = {
+  plugins: [
+    tailwindLayouts({
+      ...defaultOptions,
+      classNames: {
+        ...defaultOptions.classNames,
+        stack: 'my-stack',
+      },
+    }),
+  ],
+}
+```
+
+Note that once you change the base layout class name, its prop class names will also change accordingly: `stack-l_space-6` will now be `my-stack_space-6`.

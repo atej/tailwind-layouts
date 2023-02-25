@@ -1,0 +1,239 @@
+---
+import clsx from 'clsx'
+import Brand from '../components/Brand.astro'
+import NavPrimary from '../components/NavPrimary.astro'
+import NavSecondary from '../components/NavSecondary.astro'
+import BackToTop from '../components/BackToTop.astro'
+import Heart from '../components/icons/Heart'
+import GitHub from '../components/icons/GitHub'
+import {
+  AUTHOR_TWITTER_URL,
+  GITHUB_URL,
+  PRIMARY_LINKS,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+} from '../constants'
+import type { PathName, TOCLinks } from '../types'
+
+interface Frontmatter {
+  title: string
+  description?: string
+}
+
+interface Props {
+  title: string
+  description?: string
+  headings?: TOCLinks
+  frontmatter?: Frontmatter
+}
+
+const { title, description, headings, frontmatter } = Astro.props
+
+const pathname = Astro.url.pathname
+  .split('/')[1]
+  .toLowerCase() as PathName
+
+const sharedMainClassNames = clsx(
+  'prose prose-gray prose-pre:scrollbar-[theme(colors.gray.700),,thin] dark:prose-invert',
+  {
+    'prose-h2:mb-1 prose-h3:mb-1 prose-h4:font-medium prose-h4:text-sm [&>section:first-of-type_h2]:mt-0':
+      pathname === 'layouts',
+    'prose-h2:mb-1': pathname === 'utilities',
+  },
+)
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>
+      {frontmatter?.title || title}{
+        pathname ? ` · ${SITE_TITLE}` : ''
+      }
+    </title>
+    <meta
+      name="description"
+      content={frontmatter?.description ||
+        description ||
+        SITE_DESCRIPTION}
+    />
+  </head>
+  <body
+    class="bg-gray-900 min-h-screen stack-l stack-l_space-12 stack-l_split-after-2 focus:[&_*]:ring-2 focus:[&_*]:ring-gray-600 [&_*]:ring-offset-4 [&_*]:ring-offset-gray-900 [&_blockquote_*]:ring-offset-gray-800"
+  >
+    <header class="stack-l stack-l_space-6 pt-8">
+      <Brand />
+      <div class="absolute -top-3 right-2">
+        <a
+          href={GITHUB_URL}
+          class="text-gray-200 icon-l icon-l_space-[0.4em] opacity-60 hover:opacity-80 transition-opacity"
+        >
+          <span class="text-2xl icon-l_icon">
+            <GitHub />
+          </span>
+          <span class="sr-only sm:not-sr-only text-sm font-medium"
+            >GitHub</span
+          >
+        </a>
+      </div>
+      {pathname && <NavPrimary links={PRIMARY_LINKS} />}
+    </header>
+    {
+      headings ? (
+        <div class="sidebar-l sidebar-l_main-min-w-[70%] sidebar-l_space-12 sidebar-l_no-stretch center-l center-l_max-w-none center-l_gutters-4">
+          <aside id="sidenav">
+            <div class="pr-2">
+              <NavSecondary links={headings} />
+            </div>
+
+            <div class="pr-2 hidden max-h-[calc(100vh-8.5rem)] overflow-y-auto scrollbar-[theme(colors.gray.700),,thin] bg-gray-900 z-[60]">
+              <NavSecondary links={headings} />
+            </div>
+          </aside>
+          <main
+            id="main"
+            class={clsx(sharedMainClassNames, 'max-w-measure')}
+          >
+            <slot />
+          </main>
+        </div>
+      ) : (
+        <main
+          class={clsx(
+            sharedMainClassNames,
+            'center-l center-l_gutters-4',
+          )}
+        >
+          <slot />
+        </main>
+      )
+    }
+    <footer class="py-8 border-t-2 border-gray-700">
+      <p class="center-l center-l_text">
+        <span class="icon-l icon-l_nudge-sm">
+          <span>Crafted with</span>
+          <span class="icon-l_icon text-rose-700">
+            <Heart />
+          </span>
+          <span>
+            by <a
+              href={AUTHOR_TWITTER_URL}
+              class="[font-variation-settings:'wght'_400] hover:[font-variation-settings:'wght'_600] hover:text-gray-200 focus:[font-variation-settings:'wght'_600] focus:text-gray-200 underline underline-offset-2 transition-all duration-300"
+              >Aseem Taneja</a
+            >
+          </span>
+        </span>
+      </p>
+      {pathname && <BackToTop />}
+    </footer>
+    <script>
+      // Secondary Nav Enhancement
+      ;(function () {
+        const [html, side, main] = [
+          document.documentElement,
+          document.querySelector('#sidenav'),
+          document.querySelector('#main'),
+        ]
+        if (!side || !main) return
+
+        // Constants
+        const sideTop =
+          side.getBoundingClientRect().top + window.pageYOffset
+        const scrollMargin =
+          2 * parseFloat(getComputedStyle(html).fontSize) // 2rem
+        const sideThreshold = sideTop - scrollMargin
+        const navs = [
+          document.querySelector('#sidenav > :nth-child(1)'),
+          document.querySelector('#sidenav > :nth-child(2)'),
+        ]
+        const navClasses = [
+          ['opacity-0', 'invisible'],
+          ['fixed', 'top-8', '!block'],
+        ]
+        const links = navs[1] && [...navs[1].querySelectorAll('a')]
+        const headingThresholds = links
+          ?.map((a) => document.getElementById(a.href.split('#')[1]))
+          .map(
+            (el) =>
+              el &&
+              el.getBoundingClientRect().top +
+                window.pageYOffset -
+                scrollMargin -
+                15,
+          )
+        const linkClasses = [
+          '!text-primary-500',
+          '!opacity-100',
+          'hover:!text-primary-500',
+          '!border-primary-600',
+        ]
+
+        // check if sidebar is stacked on top
+        const checkStacked = () =>
+          side.getBoundingClientRect().width +
+            main.getBoundingClientRect().width >
+          html.getBoundingClientRect().width
+        let isStacked = checkStacked()
+
+        // VIEWPORT RESIZE EVENT LISTENER
+        new ResizeObserver(() => {
+          isStacked = checkStacked()
+          if (isStacked) {
+            // reset
+            navs.forEach((nav, i) => {
+              nav?.classList.remove(...navClasses[i])
+            })
+            links?.forEach((link) => {
+              link.classList.remove(...linkClasses)
+            })
+          }
+        }).observe(html)
+
+        // SCROLL EVENT LISTENER
+        window.addEventListener('scroll', () => {
+          // noop if sidebar stacked
+          if (isStacked) return
+          const scrollY = window.scrollY || window.pageYOffset
+          // fix the side nav
+          if (scrollY >= sideThreshold) {
+            navs.forEach((nav, i) => {
+              nav?.classList.add(...navClasses[i])
+            })
+          } else {
+            navs.forEach((nav, i) => {
+              nav?.classList.remove(...navClasses[i])
+            })
+          }
+          // highlight current section
+          headingThresholds?.forEach((top, i, tops) => {
+            if (
+              i < tops.length - 1 &&
+              top &&
+              tops[i + 1] &&
+              scrollY >= top &&
+              // @ts-ignore
+              scrollY < tops[i + 1]
+            ) {
+              links?.forEach((link, j) => {
+                if (j === i) link.classList.add(...linkClasses)
+                else link.classList.remove(...linkClasses)
+              })
+            } else if (
+              i === tops.length - 1 &&
+              top &&
+              scrollY >= top
+            ) {
+              links?.forEach((link, j) => {
+                if (j === i) link.classList.add(...linkClasses)
+                else link.classList.remove(...linkClasses)
+              })
+            }
+          })
+        })
+      })()
+    </script>
+  </body>
+</html>

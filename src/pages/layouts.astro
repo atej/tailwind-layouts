@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro'
+import { data } from './_layouts/content/sections.astro'
+import LayoutSection from './_layouts/LayoutSection.astro'
+import type { LayoutName, TOCLinks } from '../types'
+
+const headings: TOCLinks<LayoutName> = [
+  { slug: 'stack', text: 'Stack', depth: 2 },
+  { slug: 'box', text: 'Box', depth: 2 },
+  { slug: 'center', text: 'Center', depth: 2 },
+  { slug: 'cluster', text: 'Cluster', depth: 2 },
+  { slug: 'sidebar', text: 'Sidebar', depth: 2 },
+  { slug: 'switcher', text: 'Switcher', depth: 2 },
+  { slug: 'cover', text: 'Cover', depth: 2 },
+  { slug: 'grid', text: 'Grid', depth: 2 },
+  { slug: 'frame', text: 'Frame', depth: 2 },
+  { slug: 'reel', text: 'Reel', depth: 2 },
+  { slug: 'imposter', text: 'Imposter', depth: 2 },
+  { slug: 'icon', text: 'Icon', depth: 2 },
+]
+---
+
+<Base title="Layouts" headings={headings}>
+  <LayoutSection data={data.stack} />
+  <hr />
+  <LayoutSection data={data.box}>
+    <div class="stack-l stack-l_space-2">
+      <p class="text-2xl font-bold">The Box</p>
+      <p>
+        The box is used to visually demarcate content, such as via a
+        card. You can pad it and you can theme it.
+      </p>
+    </div>
+  </LayoutSection>
+  <hr />
+  <LayoutSection data={data.center}>
+    <div class="h-full bg-primary-500 text-gray-900 p-1 font-bold">
+      some inner text
+    </div>
+  </LayoutSection>
+  <hr />
+  <LayoutSection data={data.cluster} />
+  <hr />
+  <LayoutSection data={data.sidebar}>
+    <div
+      class="box-l box-l_text-gray-900 box-l_bg-secondary-500 stack-l stack-l_space-2"
+    >
+      <p class="text-2xl font-bold text-gray-900">Sidebar</p>
+      <div class="font-medium stack-l stack-l_space-0.5">
+        <p>Home</p>
+        <p>Feaures</p>
+        <p>Pricing</p>
+        <p>About Us</p>
+        <p>Contact</p>
+      </div>
+    </div>
+    <div
+      class="box-l box-l_text-gray-900 box-l_bg-primary-500 stack-l stack-l_space-2"
+    >
+      <p class="text-2xl font-bold text-gray-900">Content</p>
+      <p>
+        Leverage agile frameworks to provide a robust synopsis for
+        high level overviews. Iterative approaches to corporate
+        strategy foster collaborative thinking to further the overall
+        value proposition. Organically grow the holistic world view of
+        disruptive innovation via workplace diversity and empowerment.
+        Bring to the table win-win survival strategies to ensure
+        proactive domination.
+      </p>
+    </div>
+  </LayoutSection>
+  <hr />
+  <LayoutSection data={data.switcher} />
+  <hr />
+  <LayoutSection data={data.cover} />
+  <hr />
+  <LayoutSection data={data.grid} />
+  <hr />
+  <LayoutSection data={data.frame} />
+  <hr />
+  <LayoutSection data={data.reel} />
+  <hr />
+  <LayoutSection data={data.imposter}>
+    <div
+      class="box-l box-l_text-gray-900 box-l_bg-primary-500 cover-l cover-l_min-h-[calc(100%-2rem)] m-4"
+    >
+      <div class="cover-l_center stack-l">
+        <p class="text-2xl font-bold text-gray-900 center-l">
+          Imposter Child
+        </p>
+        <p class="center-l center-l_text">
+          I am a child element of the imposter container.
+        </p>
+      </div>
+    </div>
+  </LayoutSection>
+  <hr />
+  <LayoutSection data={data.icon}>
+    <span class="icon-l_icon" aria-hidden="true">
+      <svg viewBox="0 0 320 512">
+        <path
+          d="M294.6 166.6L317.3 144 272 98.7l-22.6 22.6L160 210.7 70.6 121.4 48 98.7 2.7 144l22.6 22.6L114.7 256 25.4 345.4 2.7 368 48 413.3l22.6-22.6L160 301.3l89.4 89.4L272 413.3 317.3 368l-22.6-22.6L205.3 256l89.4-89.4z"
+        ></path>
+      </svg>
+    </span>
+    <span class="font-medium">Close</span>
+  </LayoutSection>
+</Base>

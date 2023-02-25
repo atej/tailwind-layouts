@@ -1,0 +1,40 @@
+---
+import { marked } from 'marked'
+interface Props {
+  data: {
+    propsDocs: string[][][]
+  }
+}
+const { data } = Astro.props
+---
+
+<table>
+  <thead>
+    <tr>
+      <th><span class="text-gray-400">Name</span></th>
+      <th><span class="text-gray-400">Values</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      data.propsDocs.map((row) => (
+        <tr>
+          {row.map((cell) => (
+            <td>
+              <span
+                class="text-base block prose-code:before:content-none prose-code:after:content-none"
+                set:html={marked.parseInline(cell[0])}
+              />
+              {cell[1] && (
+                <span
+                  class="block prose-code:text-[0.8125rem]"
+                  set:html={marked.parseInline(cell[1])}
+                />
+              )}
+            </td>
+          ))}
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

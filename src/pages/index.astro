@@ -1,0 +1,75 @@
+---
+import { SITE_TITLE } from '../constants'
+import Base from '../layouts/Base.astro'
+---
+
+<Base
+  title={`${SITE_TITLE} - A layout primitives plugin for TailwindCSS`}
+>
+  <h2 class="text-center mb-12">
+    <span class="text-gray-200">Layout primitives</span> for TailwindCSS
+  </h2>
+  <p>
+    Tailwind Layouts is a <strong>TailwindCSS plugin</strong>. After
+    installing it, you get:
+  </p>
+  <ul>
+    <li>
+      A comprehensive set of framework-agnostic <strong
+        >layout utilities.</strong
+      >
+    </li>
+    <li>
+      A wonderful DX and <strong>autocompletions</strong> with Tailwind
+      IntelliSense.
+    </li>
+    <li>
+      <strong>No bloat.</strong> Only the classes you use end up in your
+      final CSS.
+    </li>
+  </ul>
+  <a
+    rel="prefetch"
+    href="/usage"
+    class="no-underline text-primary-500 font-bold [&>span]:hover:translate-x-1"
+    >Get started <span
+      class="inline-block transition-transform duration-300">→</span
+    ></a
+  >
+  <hr />
+  <h3>What are layout primitives?</h3>
+  <p>
+    Layout primitives are just
+    <strong>CSS classes</strong> designed with a <strong
+      >utility-first</strong
+    > approach, which means each layout class has a <strong
+      >single responsibility.</strong
+    > You can <strong>compose primitives</strong> to build any complex
+    layout you want.
+  </p>
+  <a
+    rel="prefetch"
+    href="/layouts"
+    class="no-underline text-primary-500 font-bold [&>span]:hover:translate-x-1"
+    >Explore layout primitives <span
+      class="inline-block transition-transform duration-300">→</span
+    ></a
+  >
+  <hr />
+  <h3>Why does this exist?</h3>
+  <p>
+    Layout is the <strong>missing piece</strong> of your design system.
+    You do not have to reinvent the wheel every time you have to build
+    a new layout. Most layouts can be <strong>broken down</strong> into
+    a set of simple
+    <strong>building blocks.</strong>
+  </p>
+  <a
+    rel="prefetch"
+    href="/motivation"
+    class="no-underline text-primary-500 font-bold [&>span]:hover:translate-x-1"
+    >Read more <span
+      class="inline-block transition-transform duration-300">→</span
+    ></a
+  >
+</Base>

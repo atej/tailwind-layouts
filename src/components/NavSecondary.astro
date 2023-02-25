@@ -1,0 +1,50 @@
+---
+import type { TOCLinks } from '../types'
+import clsx from 'clsx'
+
+interface Props {
+  links: TOCLinks
+}
+
+const { links } = Astro.props
+---
+
+<div class="stack-l stack-l_space-2 mt-1">
+  <p class="text-sm font-medium text-gray-400/75">On this page</p>
+  <nav class="stack-l stack-l_space-2 text-sm">
+    <ul>
+      {
+        links.map(({ slug, text, depth }, i) => {
+          return (
+            depth > 1 &&
+            depth < 4 && (
+              <li>
+                <a
+                  href={`#${slug}`}
+                  class={clsx(
+                    {
+                      'pt-1.5': depth === 2 && i > 0,
+                      'text-gray-200 hover:border-gray-400':
+                        depth === 2,
+                      'pt-px hover:border-gray-500': depth === 3,
+                    },
+                    'inline-block opacity-75 hover:opacity-100 transition-all text-center border-l-2 border-gray-700',
+                  )}
+                >
+                  <span
+                    class={clsx({
+                      'text-sm px-4 leading-none': depth === 2,
+                      'text-xs px-6 leading-none': depth === 3,
+                    })}
+                  >
+                    {text}
+                  </span>
+                </a>
+              </li>
+            )
+          )
+        })
+      }
+    </ul>
+  </nav>
+</div>

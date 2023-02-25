@@ -1,0 +1,60 @@
+---
+layout: '../layouts/Base.astro'
+title: 'Utilities'
+---
+
+import { DEFAULT_THEME_URL } from '../constants'
+
+## Scrollbar
+
+<p class="lead">Utilities to style the scrollbar.</p>
+
+### Theming the scrollbar
+
+It accepts up to four comma separated values which map to the scrollbar's thumb color, track color, size and thumb radius in order.
+
+```html
+<div class="scrollbar-[#fff,theme(colors.gray.900),thick,0px]">
+  <!-- content -->
+</div>
+```
+
+This will style the scrollbar with a white thumb, a track corresponding to `gray.900` from your theme, a thick size and a 0px thumb border radius.
+
+| Parameter     | Value                             | Default              |
+| ------------- | --------------------------------- | -------------------- |
+| Thumb color   | CSS color or `theme()` referenced | `rgba(0, 0, 0, 0.5)` |
+| Track color   | CSS color or `theme()` referenced | `transparent`        |
+| Size          | `thin`, `medium` or `thick`       | `medium`             |
+| Border radius | `9999px` or `0px`                 | `9999px`             |
+
+Things to note:
+
+- The default values shown above are from the <a href={DEFAULT_THEME_URL}>default theme</a>. If you have modified the default theme values while [setting global scrollbar styles](/usage#using-scrollbar-styles), the values may be different.
+- The size and border radius values will only work in WebKit based browsers. In other browsers, these values will be the browser's defaults.
+- Think of using the utility like a function in JavaScript. You can leave out any of the values and it will use the default value. For example, `scrollbar-[,blue]` will set the track color to `blue` and use default values for the other parameters.
+
+### Hiding the scrollbar
+
+Use the `no-scrollbar` utility to hide the scrollbar.
+
+Be careful while doing this. Make sure the user has other ways to tell that there is more content to scroll to.
+
+---
+
+## Borders (High Contrast)
+
+{/* prettier-ignore */}
+<p class="lead">Utilities for borders that appear only in Windows high contrast mode.</p>
+
+This is useful for if you want an element to be borderless in normal mode but have a border show up in high contrast mode. An example is demonstrated in the [Box](/layout#box) showcase.
+
+```html
+<div class="border-hc-2">
+  <!-- content -->
+</div>
+```
+
+This will add a `2px` border to the element in high contrast mode.
+
+Any [border width](https://tailwindcss.com/docs/border-width) value from your theme can be used as a value for this utility. You can also arbitrray values using Tailwind's square bracket notation.

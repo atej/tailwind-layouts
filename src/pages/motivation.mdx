@@ -1,0 +1,36 @@
+---
+layout: '../layouts/Base.astro'
+title: 'Motivation'
+---
+
+## Composing primitives
+
+This plugin is basically a Tailwind-_ization_ of the inspiring [Every Layout](https://every-layout.dev/) by [Heydon Pickering](https://twitter.com/heydonworks) and [Andy Bell](https://twitter.com/hankchizljaw).
+
+I have devoured Every Layout, more than once, with great joy and recommend it to anyone who likes to read sublime writing about designing for the web.
+
+Design sytems have primitives (components) for content - buttons, modals, tabs etc. These allow us to compose complex UIs from simple building blocks. But what about how you lay this content out on the page? Every Layout is exactly that--a set of layout primitives that you compose to create complex layouts.
+
+What is really special is the way these primitives are implemented by the authors--espousing [algorithmic design](https://every-layout.dev/blog/algorithmic-design/), eschewing media queries, and treating the web browser and the CSS language with the deference they deserve.
+
+---
+
+## Utility-first
+
+The authors of Every Layout insist that CSS best practices work.
+
+[Adam Wathan](https://twitter.com/adamwathan), the creator of [TailwindCSS](https://tailwindcss.com) thinks they don't. And if you're reading this, I'm guessing so don't you.
+
+I tend to think that the best fighting chance that CSS best practices have of working, is if they're abstracted away from us lazy, reckless developers in the form of utility classes.
+
+A utility-first approach to the layouts described in Every Layout isn't so much of a retrofitting. Since each layout has a single responsibility much like any other Tailwind utility class, it is a natural fit.
+
+---
+
+## BYOF
+
+The value of these layouts lie in that they are just CSS classes. Judging by the number of weekly Tailwind npm downloads (5M+ at the time of this writing), if it's just CSS classes you wish to distribute, a Tailwind plugin makes a lot of sense these days.
+
+Plus, the colocation of markup and styles, the magic of [Tailwind IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss), the non-stressing over cascading issues, all make for a great developer experience if you ask me. Once you've tried it, there's no going back.
+
+So go ahead, use the [layouts](/layouts) in your favorite frontend framework (or no framework at all), and make your layout problems a thing of the past.
