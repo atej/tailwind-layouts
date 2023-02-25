@@ -39,4 +39,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`     | Starts local dev server at `localhost:3000` and builds plugin in watch mode |
 | `npm run build`   | Builds the demo site to `./dist/`                                           |
 | `npm run preview` | Preview your build locally, before deploying                                |
-| `npm run publish` | Builds and publishes the plugin and to npm                                  |
