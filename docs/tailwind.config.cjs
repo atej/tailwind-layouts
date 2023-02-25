@@ -1,16 +1,29 @@
-const sharedConfig = require('./tailwind/shared.config.cjs')
+const tailwindTypography = require('@tailwindcss/typography')
 const {
   tailwindLayouts,
   defaultOptions: defaultLayoutOptions,
 } = require('tailwind-layouts')
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  ...sharedConfig,
+  content: [
+    './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+  ],
+  theme: {
+    extend: {
+      fontFamily: require('./tailwind/fontFamily.cjs'),
+      colors: require('./tailwind/colors.cjs'),
+      layouts: require('./tailwind/layouts.cjs'),
+      typography: require('./tailwind/typography.cjs'),
+    },
+  },
   plugins: [
-    ...sharedConfig.plugins,
+    require('./tailwind/base.cjs'),
+    tailwindTypography,
     tailwindLayouts({
       ...defaultLayoutOptions,
       useGlobalScrollbarStyles: true,
     }),
   ],
+  darkMode: 'class',
 }
