@@ -2,10 +2,10 @@
   "name": "tailwind-layouts-packages",
   "workspaces": [
     "tailwind-layouts",
-    "demo"
+    "docs"
   ],
   "scripts": {
-    "dev:demo": "npm run dev --workspace=demo",
+    "dev:docs": "npm run dev --workspace=docs",
     "dev:plugin": "npm run dev --workspace=tailwind-layouts",
     "dev": "concurrently \"npm:dev:*\"",
     "check": "npm run check --workspaces",
