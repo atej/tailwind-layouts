@@ -6,16 +6,15 @@
     "docs"
   ],
   "scripts": {
+    "clean": "rimraf ./tailwind-layouts/dist && rimraf ./docs/dist",
     "dev:docs": "npm run dev --workspace=docs",
     "dev:plugin": "npm run dev --workspace=tailwind-layouts",
-    "clean": "rimraf ./tailwind-layouts/dist && rimraf ./docs/dist",
     "dev": "concurrently \"npm:dev:*\"",
     "check": "npm run check --workspaces",
     "publish:plugin": "npm run publish --workspace=tailwind-layouts"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
-    "rimraf": "^4.1.2",
-    "tailwind-layouts": "^0.1.0"
+    "rimraf": "^4.1.2"
   }
 }
