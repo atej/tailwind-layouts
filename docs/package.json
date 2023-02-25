@@ -1,10 +1,10 @@
 {
-  "name": "tailwind-layouts-demo",
+  "name": "tailwind-layouts-docs",
   "type": "module",
   "version": "0.1.0",
   "private": true,
   "author": "Aseem Taneja <taneja.aseem@gmail.com> (https://twitter.com/aseemtaneja)",
-  "description": "The demo site for the Tailwind Layouts plugin",
+  "description": "The docs site for the Tailwind Layouts plugin.",
   "bugs": {
     "url": "https://github.com/atej/tailwind-layouts/issues"
   },
