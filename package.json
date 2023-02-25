@@ -1,0 +1,17 @@
+{
+  "name": "tailwind-layouts-packages",
+  "workspaces": [
+    "tailwind-layouts",
+    "demo"
+  ],
+  "scripts": {
+    "dev:demo": "npm run dev --workspace=demo",
+    "dev:plugin": "npm run dev --workspace=tailwind-layouts",
+    "dev": "concurrently \"npm:dev:*\"",
+    "check": "npm run check --workspaces",
+    "publish:plugin": "npm run publish --workspace=tailwind-layouts"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

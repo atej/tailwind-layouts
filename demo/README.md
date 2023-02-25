@@ -1,38 +1,8 @@
-# Tailwind Layouts
+# Tailwind Layouts Docs
 
-Layout primitives for Tailwind CSS.
-
-📝 Read the [docs](https://tw-layouts.netlify.app.app) for more information.
-
-## Develop
-
-### Install dependencies
-
-```
-npm install
-```
-
-### Start dev server and watch plugin for changes
-
-```
-npm run dev
-```
-
-## Project Structure
-
-```
-/
-├── src/
-├── plugin/
-```
-
-[`src`](/src) - Demo site built with [Astro](https://astro.build)
-
-[`plugin`](/plugin) - Plugin built with [Vite in library mode](https://vitejs.dev/guide/build.html#library-mode)
+Source for these [docs](https://tw-layouts.netlify.app).
 
 ## Commands
-
-All commands are run from the root of the project, from a terminal:
 
 | Command           | Action                                                                      |
 | :---------------- | :-------------------------------------------------------------------------- |

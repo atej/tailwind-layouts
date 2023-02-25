@@ -9,16 +9,12 @@
     "url": "https://github.com/atej/tailwind-layouts/issues"
   },
   "scripts": {
-    "dev:demo": "astro dev",
-    "dev:plugin": "cd \"./plugin\" && npm run dev",
-    "dev": "concurrently \"npm:dev:*\"",
+    "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check:plugin": "cd \"./plugin\" && npm run check",
-    "check:demo": "astro check && cd \"./src\" && npx tsc",
-    "check": "concurrently \"npm:check:*\""
+    "check": "astro check && npx tsc"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.17.2",
@@ -42,7 +38,6 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^18.14.1",
-    "concurrently": "^7.6.0",
     "tailwind-layouts": "^0.1.0"
   }
 }
