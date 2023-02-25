@@ -1,5 +1,6 @@
 {
   "name": "tailwind-layouts-packages",
+  "private": true,
   "workspaces": [
     "tailwind-layouts",
     "docs"
