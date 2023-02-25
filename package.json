@@ -18,8 +18,7 @@
     "astro": "astro",
     "check:plugin": "cd \"./plugin\" && npm run check",
     "check:demo": "astro check && cd \"./src\" && npx tsc",
-    "check": "concurrently \"npm:check:*\"",
-    "publish": "cd \"./plugin\" && npm run publish"
+    "check": "concurrently \"npm:check:*\""
   },
   "dependencies": {
     "@astrojs/mdx": "^0.17.2",
