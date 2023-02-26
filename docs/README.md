@@ -1,6 +1,6 @@
 # Tailwind Layouts Docs
 
-Source for these [docs](https://tailwind-layouts.dev).
+Source for the [docs](https://tailwind-layouts.dev) for [`tailwind-layouts`](https://www.npmjs.com/package/tailwind-layouts)
 
 ## Commands
 
