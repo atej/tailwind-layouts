@@ -11,6 +11,9 @@
     "dev:plugin": "npm run dev --workspace=tailwind-layouts",
     "dev": "concurrently \"npm:dev:*\"",
     "check": "npm run check --workspaces",
+    "build:plugin": "npm run build --workspace=tailwind-layouts",
+    "build:docs": "npm run build --workspace=docs",
+    "build": "npm run build:plugin && npm run build:docs",
     "publish:plugin": "npm run publish --workspace=tailwind-layouts"
   },
   "devDependencies": {
