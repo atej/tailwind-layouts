@@ -2,4 +2,4 @@
 
 Layout primitives for Tailwind CSS.
 
-📝 Read the [docs](https://tw-layouts.netlify.app) for more information.
+📝 Read the [docs](https://tailwind-layouts.dev) for more information.

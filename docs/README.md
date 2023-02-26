@@ -1,6 +1,6 @@
 # Tailwind Layouts Docs
 
-Source for these [docs](https://tw-layouts.netlify.app).
+Source for these [docs](https://tailwind-layouts.dev).
 
 ## Commands
 
