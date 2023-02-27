@@ -7,7 +7,7 @@ import BackToTop from '../components/BackToTop.astro'
 import Heart from '../components/icons/Heart'
 import GitHub from '../components/icons/GitHub'
 import {
-  AUTHOR_TWITTER_URL,
+  AUTHOR_TWITTER,
   GITHUB_URL,
   PRIMARY_LINKS,
   SITE_DESCRIPTION,
@@ -61,6 +61,8 @@ const sharedMainClassNames = clsx(
         SITE_DESCRIPTION}
     />
     <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content={`@${AUTHOR_TWITTER}`} />
   </head>
   <body
     class="bg-gray-900 min-h-screen stack-l stack-l_space-12 stack-l_split-after-2 focus:[&_*]:ring-2 focus:[&_*]:ring-gray-600 [&_*]:ring-offset-4 [&_*]:ring-offset-gray-900 [&_blockquote_*]:ring-offset-gray-800"
@@ -121,7 +123,7 @@ const sharedMainClassNames = clsx(
           </span>
           <span>
             by <a
-              href={AUTHOR_TWITTER_URL}
+              href={`https://twitter.com/${AUTHOR_TWITTER}`}
               class="[font-variation-settings:'wght'_400] hover:[font-variation-settings:'wght'_600] hover:text-gray-200 focus:[font-variation-settings:'wght'_600] focus:text-gray-200 underline underline-offset-2 transition-all duration-300"
               >Aseem Taneja</a
             >
