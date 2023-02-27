@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "ISC",
   "author": "Aseem Taneja <taneja.aseem@gmail.com> (https://twitter.com/aseemtaneja)",
-  "description": "Layout primitives for TailwindCSS",
+  "description": "Layout primitives for Tailwind CSS",
   "keywords": [
     "tailwindcss",
     "tailwindcss-plugin",
