@@ -176,9 +176,8 @@ const sharedMainClassNames = clsx(
 
         // check if sidebar is stacked on top
         const checkStacked = () =>
-          side.getBoundingClientRect().width +
-            main.getBoundingClientRect().width >
-          html.getBoundingClientRect().width
+          side.getBoundingClientRect().width >=
+          main.getBoundingClientRect().width
         let isStacked = checkStacked()
 
         // VIEWPORT RESIZE EVENT LISTENER
