@@ -37,12 +37,6 @@ module.exports = ({ theme }) => ({
         fontWeight: '500',
       },
       pre: {
-        maxWidth: `calc(100vw - ${theme('spacing.4')} * 2)`,
-        '@supports (max-width: min(calc(100vw - 2rem), 70ch))': {
-          maxWidth: `min(calc(100vw - ${theme(
-            'spacing.4',
-          )} * 2), 70ch)`,
-        },
         borderRadius: 0,
         borderWidth: `1px`,
         borderColor: 'var(--tw-prose-pre-borders)',

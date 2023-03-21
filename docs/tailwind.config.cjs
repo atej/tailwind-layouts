@@ -23,6 +23,10 @@ module.exports = {
     tailwindLayouts({
       ...defaultLayoutOptions,
       useGlobalScrollbarStyles: true,
+      measureExceptions: [
+        defaultLayoutOptions.measureExceptions,
+        '.prose *:not(img):not(video)',
+      ].join(','),
     }),
   ],
   darkMode: 'class',

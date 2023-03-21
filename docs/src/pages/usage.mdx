@@ -153,21 +153,23 @@ footer {
 }
 ```
 
-You can specify the exceptions via the `measureExceptions` plugin option.
+You can specify the exceptions via the `measureExceptions` plugin option. For example, to exclude `<section>` elements:
 
 ```js
 module.exports = {
   plugins: [
     tailwindLayouts({
       ...defaultOptions,
-      measureExceptions:
-        'html,body,div,header,nav,main,footer,section',
+      measureExceptions: [
+        ddefaultOptions.measureExceptions,
+        'section',
+      ].join(','),
     }),
   ],
 }
 ```
 
-If you want to opt out of the global measure, you can set the `useGlobalMeasure` option to `false`:
+If you want to completely opt out of the global measure, you can set the `useGlobalMeasure` option to `false`:
 
 ```js
 module.exports = {
@@ -182,7 +184,33 @@ module.exports = {
 
 #### Using with Tailwind Typography
 
-The official [Tailwind Typography](https://tailwindcss.com/docs/typography-plugin) plugin also sets a measure for prose content. If you are using a global measure and want it to apply to your prose content, you can apply the `max-w-measure` class along with the `prose` class to your prose container.
+The [Tailwind Typography](https://tailwindcss.com/docs/typography-plugin) plugin also sets a measure (maximum width) for the prose container. The value is `65ch` which is also the default value used by this plugin. If you have overridden the default value with a custom value, you sould probably use the same for prose content as well.
+
+You can do this by applying `max-w-measure` along with the `prose` class to the prose container.
+
+```html
+<div class="prose max-w-measure">
+  <!-- prose content -->
+</div>
+```
+
+As the layout of children of the prose container is controlled by the typography plugin, you can exclude them too. In your `tailwind.config.js` file:
+
+```js
+module.exports = {
+  plugins: [
+    tailwindLayouts({
+      ...defaultOptions,
+      measureExceptions: [
+        defaultOptions.measureExceptions,
+        '.prose *:not(img):not(video)',
+      ].join(','),
+    }),
+  ],
+}
+```
+
+By doing this we effectively set `max-width: none` to all children of a prose container, except we do not want to override `max-width:100%` set by [Preflight](https://tailwindcss.com/docs/preflight#images-are-constrained-to-the-parent-width) for `<img>` and `<video>` elements.
 
 #### Overriding measure for an element
 
@@ -216,8 +244,49 @@ module.exports = {
       layouts: ({ theme }) => ({
         scrollbarThumbColor: theme('colors.gray.500'),
         scrollbarTrackColor: theme('colors.gray.200'),
-        scrollbarSize: 'medium' // 'thin' | 'medium' | 'thick'
+        scrollbarSize: 'medium', // 'thin' | 'medium' | 'thick'
         scrollbarBorderRadius: '9999px', // 9999px | 0px
+      }),
+    },
+  },
+}
+```
+
+**Tip:** Use CSS properties for different colors in light and dark mode. For example, in your `global.css` file:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ... */
+
+@layer base {
+  :root {
+    --tw-scrollbar-track: theme(colors.gray.50);
+    --tw-scrollbar-thumb: theme(colors.gray.400);
+    --tw-scrollbar-invert-track: theme(colors.gray.900);
+    --tw-scrollbar-invert-thumb: theme(colors.gray.500);
+  }
+  .dark {
+    --tw-scrollbar-track: var(--tw-scrollbar-invert-track);
+    --tw-scrollbar-thumb: var(--tw-scrollbar-invert-thumb);
+  }
+}
+```
+
+If you do not have access to a `global.css` file, the same can be achieved via the [`addBase()` Plugin API](https://tailwindcss.com/docs/plugins#adding-base-styles) in your `tailwind.config.js` file.
+
+Then in the `layouts` section of your `tailwind.config.js` file:
+
+```js
+module.exports = {
+  theme: {
+    extend: {
+      layouts: ({ theme }) => ({
+        // 🌗 Color scheme aware CSS properties!
+        scrollbarThumbColor: 'var(--tw-scrollbar-thumb)',
+        scrollbarTrackColor: 'var(--tw-scrollbar-track)',
       }),
     },
   },

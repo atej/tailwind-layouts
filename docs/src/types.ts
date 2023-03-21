@@ -1,4 +1,5 @@
 export type PathName =
+  | ''
   | 'usage'
   | 'layouts'
   | 'utilities'
