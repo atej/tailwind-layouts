@@ -1,7 +1,7 @@
 {
   "name": "tailwind-layouts-docs",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "author": "Aseem Taneja <taneja.aseem@gmail.com> (https://twitter.com/aseemtaneja)",
   "description": "The docs site for the Tailwind Layouts plugin.",
