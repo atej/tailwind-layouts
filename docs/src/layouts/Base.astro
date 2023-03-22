@@ -67,7 +67,10 @@ const proseClassNames = clsx(
   <body
     class={clsx(
       'bg-gray-900 min-h-screen stack-l stack-l_space-12 focus:[&_*]:ring-2 focus:[&_*]:ring-gray-600 [&_*]:ring-offset-4 [&_*]:ring-offset-gray-900 [&_blockquote_*]:ring-offset-gray-800',
-      { 'stack-l_split-after-2': pathname === '' },
+      {
+        'stack-l_split-after-2': !headings,
+        'stack-l_no-flex': !!headings,
+      },
     )}
   >
     <header class="stack-l stack-l_space-6 pt-8">

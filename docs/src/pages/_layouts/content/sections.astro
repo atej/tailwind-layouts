@@ -33,11 +33,16 @@ export const data: Record<LayoutName, SectionData> = {
           'This range can be increased via the `maxStackSplitAfter` option.',
         ],
       ],
+      [
+        ['`no-flex`', 'Do not give the stack a flexbox context.'],
+        ['-'],
+      ],
     ],
     demoClassNames: {
       'stack-l': true,
       'stack-l_space-2': false,
       'stack-l_split-after-2': false,
+      'stack-l_no-flex': false,
     },
     requiredClassNames: ['stack-l'],
     customBlocks: ['h-9', 'h-9', 'h-9'],
