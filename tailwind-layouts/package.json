@@ -1,6 +1,6 @@
 {
   "name": "tailwind-layouts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "ISC",
   "author": "Aseem Taneja <taneja.aseem@gmail.com> (https://twitter.com/aseemtaneja)",
   "description": "Layout primitives for Tailwind CSS",
