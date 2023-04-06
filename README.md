@@ -12,7 +12,7 @@ Read the [docs](https://tailwind-layouts.dev) for more information.
 
 ---
 
-Monorepo containing `tailwind-layouts` packages:
+This is a monorepo containing the following packages:
 
-- [Plugin source](/tailwind-layouts)
-- [Docs source](/docs)
+- [Tailwind Layouts plugin](/tailwind-layouts)
+- [Docs site](/docs)
